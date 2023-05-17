@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import ResidentCard from "../ResidentCard/ResidentCard";
+import { usePagination } from "../../hooks/usePagination";
 
 // Paginación
 // Dividir en grupos mas pequeños una lista de elementos
@@ -30,21 +31,20 @@ import ResidentCard from "../ResidentCard/ResidentCard";
 // limiteInferior = quantity * (numberPage - 1)
 // limiteSuperior = quantity * numberPage - 1
 
+// Logica + Estado === Hook
+
 const ResidentList = ({ residents = [] }) => {
   const [quantityPagination, setQuantityPagination] = useState(6);
-  const [numberPage, setNumberPage] = useState(1);
-
-  const lowerLimit = quantityPagination * (numberPage - 1);
-  const upperLimit = quantityPagination * numberPage - 1;
-  const totalPages = Math.ceil(residents.length / quantityPagination);
-
-  const residentSlice = residents.slice(lowerLimit, upperLimit + 1);
-
-  const changePageTo = (page) => {
-    if (page > totalPages) setNumberPage(totalPages);
-    else if (page < 1) setNumberPage(1);
-    else setNumberPage(page);
-  };
+  // const { 
+  //   currentPage: numberPage, 
+  //   listSlice: residentsSlice, 
+  //   pages, 
+  //   changePageTo, 
+  // } = usePagination(residents, quantityPagination);
+  const [numberPage, residentsSlice, pages, changePageTo] = usePagination(
+    residents, 
+    quantityPagination
+    );
 
   // const getPageButtons = () => {
   //   const buttons = [];
@@ -60,18 +60,33 @@ const ResidentList = ({ residents = [] }) => {
 
   return (
     <>
-    <div>
+      <div>
         <button onClick={() => changePageTo(numberPage - 1)}>Back</button>
         {/* {getPageButtons()} */}
-        {  }
+        {pages.map((i) => (
+            <button 
+            key={i} 
+            onClick={() => changePageTo(i)} 
+            style={ {color:numberPage === i ? 'red' : undefined} }
+            >
+              {i}
+            </button>
+          ))}
         <button onClick={() => changePageTo(numberPage + 1)}>Next</button>
       </div>
 
-      {!residentSlice.length && <p>No hay residents en esta ubicación</p>}
+      <select name="quantity_per_page" value={quantityPagination} onChange={(e) => setQuantityPagination(Number(e.target.value))}>
+          <option>5</option>
+          <option>10</option>
+          <option value="15">Quince</option>
+          <option value="20">Veinte</option>
+      </select>
 
-      {Boolean(residentSlice.length) && (
+      {!residentsSlice.length && <p>No hay residents en esta ubicación</p>}
+
+      {Boolean(residentsSlice.length) && (
         <ul>
-          {residentSlice.map((residentUrl) => (
+          {residentsSlice.map((residentUrl) => (
             <li key={residentUrl}>
               <ResidentCard url={residentUrl} />
             </li>
@@ -79,7 +94,6 @@ const ResidentList = ({ residents = [] }) => {
           ;
         </ul>
       )}
-
     </>
   );
 };

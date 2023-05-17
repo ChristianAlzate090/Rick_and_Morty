@@ -1,17 +1,4 @@
-form {
+.search_form {
+    background-color: red;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-input {
-    border-radius: 30px;
-    width: 300px;
-    margin: auto;
-}
-
-button {
-    border-radius: 30px;
-    width: 100px;
-    margin: auto;
 }
