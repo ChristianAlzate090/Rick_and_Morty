@@ -2,34 +2,13 @@
   background-image: url('../images/background2.jpg');
 }
 
-.container {
-  height: 100vh;
-  display: grid;
-  position: relative;
-}
-
-/* .title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  align-items: center;
-  height: 500px;
-} */
-
-.portal, .title {
-  position: absolute;
-  width: 100%;
+.portal {
   display: flex;
   justify-content: center;
 }
 
-.title img {
-  height: 200px;
-}
-
-.portal img{
-  height: 500px;
+.portal img {
+  height: 300px;
 }
 
 @font-face {

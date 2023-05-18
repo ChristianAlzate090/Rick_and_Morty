@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import ResidentCard from "../ResidentCard/ResidentCard";
 import { usePagination } from "../../hooks/usePagination";
+import "./ResidentList.css";
 
 // Paginación
 // Dividir en grupos mas pequeños una lista de elementos
@@ -35,16 +36,16 @@ import { usePagination } from "../../hooks/usePagination";
 
 const ResidentList = ({ residents = [] }) => {
   const [quantityPagination, setQuantityPagination] = useState(6);
-  // const { 
-  //   currentPage: numberPage, 
-  //   listSlice: residentsSlice, 
-  //   pages, 
-  //   changePageTo, 
+  // const {
+  //   currentPage: numberPage,
+  //   listSlice: residentsSlice,
+  //   pages,
+  //   changePageTo,
   // } = usePagination(residents, quantityPagination);
   const [numberPage, residentsSlice, pages, changePageTo] = usePagination(
-    residents, 
+    residents,
     quantityPagination
-    );
+  );
 
   // const getPageButtons = () => {
   //   const buttons = [];
@@ -60,32 +61,23 @@ const ResidentList = ({ residents = [] }) => {
 
   return (
     <>
-      <div>
-        <button onClick={() => changePageTo(numberPage - 1)}>Back</button>
-        {/* {getPageButtons()} */}
-        {pages.map((i) => (
-            <button 
-            key={i} 
-            onClick={() => changePageTo(i)} 
-            style={ {color:numberPage === i ? 'red' : undefined} }
-            >
-              {i}
-            </button>
-          ))}
-        <button onClick={() => changePageTo(numberPage + 1)}>Next</button>
-      </div>
-
-      <select name="quantity_per_page" value={quantityPagination} onChange={(e) => setQuantityPagination(Number(e.target.value))}>
-          <option>5</option>
-          <option>10</option>
-          <option value="15">Quince</option>
-          <option value="20">Veinte</option>
+    <div className="quantity_per_page">
+      <select
+        name="quantity_per_page"
+        value={quantityPagination}
+        onChange={(e) => setQuantityPagination(Number(e.target.value))}
+      >
+        <option>1</option>
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
       </select>
+    </div>
 
       {!residentsSlice.length && <p>No hay residents en esta ubicación</p>}
 
       {Boolean(residentsSlice.length) && (
-        <ul>
+        <ul className="info">
           {residentsSlice.map((residentUrl) => (
             <li key={residentUrl}>
               <ResidentCard url={residentUrl} />
@@ -94,6 +86,20 @@ const ResidentList = ({ residents = [] }) => {
           ;
         </ul>
       )}
+          <div className="change_page">
+            <button onClick={() => changePageTo(numberPage - 1)}>‹</button>
+            {/* {getPageButtons()} */}
+            {pages.map((i) => (
+              <button
+                key={i}
+                onClick={() => changePageTo(i)}
+                style={{ color: numberPage === i ? "red" : undefined }}
+              >
+                {i}
+              </button>
+            ))}
+            <button onClick={() => changePageTo(numberPage + 1)}>›</button>
+          </div>
     </>
   );
 };

@@ -19,27 +19,27 @@ const ResidentCard = ({ url }) => {
 
     <>
     { !resident ? <p>Loading Character</p> : (
-      <article>
+      <article className="container">
         <div>
           <img src={resident.image} alt={resident.name} />
         </div>
   
-        <h3>{resident.name}</h3>
-        <ul>
+        <h3 className="name">{resident.name}</h3>
+        <ul className="info_card">
           <li>
-            <b>Specie: </b>
+            <b>Specie: </b> <br />
             {resident.species}
           </li>
           <li>
-            <b>Origin: </b>
+            <b>Origin: </b> <br />
             {resident.origin.name}
           </li>
           <li>
-            <b>Status: </b>
+            <b>Status: </b> <br />
             {resident.status}
           </li>
           <li>
-            <b>Appearances: </b>
+            <b>Appearances: </b> <br />
             {resident.episode.length}
           </li>
         </ul>

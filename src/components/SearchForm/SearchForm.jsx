@@ -42,11 +42,9 @@ return (
         {errorSearchLocation}
       </p>
 
-      <button type="submit">Search</button>
+      <button type="submit"><img src="./public/backhome.png" alt="sumbit" /></button>
     </form>
   );
 };
 
 export default SearchForm;
-
-// queda en el 01:31:04 del video
