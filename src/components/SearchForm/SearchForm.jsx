@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './SearchForm.css'
+import search from "../images/backhome.png"
 
 const SearchForm = ({ oeMeEstoyEnviando }) => {
     const [searchLocation, setSearchLocation] = useState("");
@@ -42,7 +43,7 @@ return (
         {errorSearchLocation}
       </p>
 
-      <button type="submit"><img src="./public/backhome.png" alt="sumbit" /></button>
+      <button type="submit"><img src={search} alt="sumbit" /></button>
     </form>
   );
 };
