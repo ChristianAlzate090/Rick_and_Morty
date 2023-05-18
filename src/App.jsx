@@ -6,7 +6,7 @@ import { getRandonNumber } from "./utils/getRandomNumber";
 import Location from "./components/Location/Location";
 import Loader from "./components/Loader/Loader";
 import ResidentList from "./components/ResidentList/ResidentList";
-import SearchForm from "./components/searchForm/searchForm";
+import SearchForm from "./components/SearchForm/SearchForm";
 import Header from "./components/Header/Header";
 
 
